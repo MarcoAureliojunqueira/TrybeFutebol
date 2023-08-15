@@ -1,4 +1,5 @@
 import * as express from 'express';
+import router from './database/Routes/index';
 
 class App {
   public app: express.Express;
@@ -7,9 +8,14 @@ class App {
     this.app = express();
 
     this.config();
+    this.router();
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
+  }
+
+  private router(): void {
+    this.app.use(router);
   }
 
   private config():void {
