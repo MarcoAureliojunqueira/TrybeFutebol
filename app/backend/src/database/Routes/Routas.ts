@@ -1,10 +1,11 @@
 // src/routes/book.routes.ts
 
 import { Router } from 'express';
-import teamsGet from '../Controllers/ControllerTeams';
+import { GetAll, getById } from '../Controllers/ControllerTeams';
 
 const router = Router();
 
-router.get('/', teamsGet);
+router.get('/', GetAll);
+router.get('/:id', getById);
 
 export default router;

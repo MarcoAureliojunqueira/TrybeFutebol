@@ -6,5 +6,11 @@ const teamsGet = async ():Promise<Iteams[]> => {
   // console.log('------->', teamsget);
   return teamsget;
 };
+const findById = async (id: Iteams['id']): Promise<Iteams | null> => {
+  const getId = await ModelTeams.findByPk(id);
 
-export default { teamsGet };
+  console.log('------->', getId);
+  return getId;
+};
+
+export default { teamsGet, findById };
