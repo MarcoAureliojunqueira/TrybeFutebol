@@ -1,6 +1,5 @@
-import { Model, QueryInterface, DataTypes } from 'sequelize';
-import IExample from '../../Interfaces/Example';
-import ModelTeams from '../models/teams';
+import {  QueryInterface, DataTypes } from 'sequelize';
+
 
 export default {
   up(queryInterface: QueryInterface) {

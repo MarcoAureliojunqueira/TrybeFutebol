@@ -1,11 +1,19 @@
 // src/routes/book.routes.ts
+import { Request, Router, Response } from 'express';
+import validSenhaeEmail from '../../Middlewares/validacaoEmailePassword';
+import TeamController from '../Controllers/ControllerTeams';
+import login from '../Controllers/ControllerLogin';
 
-import { Router } from 'express';
-import { GetAll, getById } from '../Controllers/ControllerTeams';
+const team = new TeamController();
 
 const router = Router();
+router.get('/teams/:id', (req: Request, res: Response) => team.getById(req, res));
+router.get('/teams', (req: Request, res: Response) => team.getAllteams(req, res));
 
-router.get('/', GetAll);
-router.get('/:id', getById);
+router.post(
+  '/login',
+  validSenhaeEmail,
+  (req: Request, res: Response) => login(req, res),
+);
 
 export default router;

@@ -1,16 +1,19 @@
-import Iteams from '../../Interfaces/teams';
-import ModelTeams from '../models/teams';
+import { Iteams, IteamsModel } from '../../Interfaces/teams';
+import ModelTeams from '../models/teamsCaminhos/teams';
 
-const teamsGet = async ():Promise<Iteams[]> => {
-  const teamsget = await ModelTeams.findAll();
-  // console.log('------->', teamsget);
-  return teamsget;
-};
-const findById = async (id: Iteams['id']): Promise<Iteams | null> => {
-  const getId = await ModelTeams.findByPk(id);
+export default class TeamService {
+  constructor(
+    private teamModel: IteamsModel = new ModelTeams(),
+  ) { }
 
-  console.log('------->', getId);
-  return getId;
-};
+  public async getAllTeam(): Promise<Iteams[]> {
+    const getAll = await this.teamModel.findAll();
+    return getAll;
+  }
 
-export default { teamsGet, findById };
+  public async getBookById(id: number): Promise<Iteams | null> {
+    const result = await this.teamModel.findById(id);
+
+    return result;
+  }
+}
