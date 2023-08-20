@@ -12,4 +12,10 @@ async function login(req: Request, res: Response):Promise<void> {
   }
 }
 
-export default login;
+async function loginGet(req: Request, res: Response):Promise<void> {
+  const { role } = res.locals.role;
+
+  res.status(200).json({ role });
+}
+
+export { login, loginGet };

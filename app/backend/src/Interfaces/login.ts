@@ -10,3 +10,8 @@ export type newILogin = {
   email: string,
   password: string
 };
+
+export type loginUser = {
+  username: string
+  role:string
+};

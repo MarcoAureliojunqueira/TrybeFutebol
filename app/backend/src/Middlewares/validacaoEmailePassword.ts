@@ -7,14 +7,14 @@ const validSenhaeEmail = (req: Request, res: Response, next: NextFunction) => {
   }
   const validacao = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/;
   if (!validacao.test(email)) {
-    return res.status(400)
-      .json({ message: '"email" must be a valid email' });
+    return res.status(401)
+      .json({ message: 'Invalid email or password' });
   }
 
   if (password.length < 6) {
     return res
-      .status(400)
-      .json({ message: '"password" length must be at least 6 characters long' });
+      .status(401)
+      .json({ message: 'Invalid email or password' });
   }
 
   next();

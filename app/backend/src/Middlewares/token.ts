@@ -17,19 +17,21 @@ function tokenCreate(payload: jwt.JwtPayload): string {
 function verifyToken(req: Request, res: Response, next:NextFunction) {
   try {
     const token = req.headers.authorization;
-
+    const erro = 'Token not found';
     if (!token) {
+      return res.status(401).json({ message: erro });
+    }
+    const data = token?.split('Bearer ');
+    if (!data[1]) {
       return res.status(401).json({ message:
-      'Token not found',
+        'Token must be a valid token',
       });
     }
-    // const tokenLivre = token?.split(' ')[1];
-
-    jwt.verify(token, secret);
-
+    const payload = jwt.verify(data[1], secret);
+    res.locals.role = payload;
     next();
   } catch (error) {
-    res.status(401).json({ message: 'Invalid token' });
+    res.status(401).json({ message: 'Token not found' });
   }
 }
 

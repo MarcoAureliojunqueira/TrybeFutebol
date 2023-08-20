@@ -2,7 +2,8 @@
 import { Request, Router, Response } from 'express';
 import validSenhaeEmail from '../../Middlewares/validacaoEmailePassword';
 import TeamController from '../Controllers/ControllerTeams';
-import login from '../Controllers/ControllerLogin';
+import { login, loginGet } from '../Controllers/ControllerLogin';
+import token from '../../Middlewares/token';
 
 const team = new TeamController();
 
@@ -14,6 +15,11 @@ router.post(
   '/login',
   validSenhaeEmail,
   (req: Request, res: Response) => login(req, res),
+);
+router.get(
+  '/login/role',
+  token.verifyToken,
+  (req: Request, res: Response) => loginGet(req, res),
 );
 
 export default router;
