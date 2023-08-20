@@ -3,6 +3,7 @@ import { Request, Router, Response } from 'express';
 import validSenhaeEmail from '../../Middlewares/validacaoEmailePassword';
 import TeamController from '../Controllers/ControllerTeams';
 import { login, loginGet } from '../Controllers/ControllerLogin';
+import getAllMatches from '../Controllers/ControlerMatches';
 import token from '../../Middlewares/token';
 
 const team = new TeamController();
@@ -21,5 +22,6 @@ router.get(
   token.verifyToken,
   (req: Request, res: Response) => loginGet(req, res),
 );
+router.get('/matches', (req: Request, res: Response) => getAllMatches(req, res));
 
 export default router;
