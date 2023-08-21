@@ -3,7 +3,8 @@ import { Request, Router, Response } from 'express';
 import validSenhaeEmail from '../../Middlewares/validacaoEmailePassword';
 import TeamController from '../Controllers/ControllerTeams';
 import { login, loginGet } from '../Controllers/ControllerLogin';
-import { getAllMatches, finalizarPartidas } from '../Controllers/ControlerMatches';
+import { getAllMatches, finalizarPartidas,
+  getIdMatches, inserirJogos } from '../Controllers/ControlerMatches';
 import token from '../../Middlewares/token';
 
 const team = new TeamController();
@@ -23,5 +24,26 @@ router.get(
   (req: Request, res: Response) => loginGet(req, res),
 );
 router.get('/matches', (req: Request, res: Response) => getAllMatches(req, res));
-router.patch('/matches/:id/finish', (req: Request, res: Response) => finalizarPartidas(req, res));
+
+router.patch(
+  '/matches/:id',
+  token.verifyToken,
+  (req: Request, res: Response) => getIdMatches(req, res),
+);
+
+router.patch(
+  '/matches/:id/finish',
+  token.verifyToken,
+
+  (req: Request, res: Response) => finalizarPartidas(req, res),
+);
+router.post(
+  '/matches',
+  token.verifyToken,
+  (
+    req: Request,
+    res: Response,
+  ) => inserirJogos(req, res),
+);
+
 export default router;
