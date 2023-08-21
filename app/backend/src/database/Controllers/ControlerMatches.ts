@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import getMatches from '../Services/matches';
+import { getMatches, finalizarPartida } from '../Services/matches';
 
 async function getAllMatches(req:Request, res:Response):Promise<Response | void> {
   const { inProgress } = req.query;
@@ -13,7 +13,15 @@ async function getAllMatches(req:Request, res:Response):Promise<Response | void>
   } else {
     return res.status(200).json(get);
   }
-  console.log(get);
+}
+async function finalizarPartidas(
+  req: Request,
+  res: Response,
+): Promise<Response> {
+  const { id } = req.params;
+
+  await finalizarPartida(Number(id));
+  return res.status(200).json({ message: 'Partida Finalizada!!' });
 }
 
-export default getAllMatches;
+export { getAllMatches, finalizarPartidas };

@@ -16,15 +16,11 @@ async function getMatches():Promise<matches[]> {
 
   return get as unknown as matches[];
 }
-// async finalizarPartida(id: number): Promise<void> {
-//  await modelMatches.update({ //inProgress: false }, { where: { /id } });
-// }0h26
-// async finalizarPartida(req: //Request, res: Response, next: NextFunction): Promise<Response | void> {
-//  try {
-//    await ServiceMathces.finalizarPartida(Number(req.params.id));
-//   return res.status(200).json({ message: 'Partida Finalizada!!' });
-//   } catch (err) {
-//    next(err);
-//  }
+async function finalizarPartida(id: number): Promise<number[]> {
+  const resultado = await ModelMatches.update({ inProgress: false }, { where: { id } });
+  console.log(resultado);
 
-export default getMatches;
+  return resultado;
+}
+
+export { getMatches, finalizarPartida };
