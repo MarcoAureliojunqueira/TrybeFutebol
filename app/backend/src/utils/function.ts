@@ -39,7 +39,7 @@ function calculateTotalPoints(victories: number, draws:number) {
 }
 
 // Função para calcular o saldo de gols
-function calculateGoalsBalance(goalsFavo:number, goalsOw:number):number {
+function calcGoalsBal(goalsFavo:number, goalsOw:number):number {
   return goalsFavo - goalsOw;
 }
 
@@ -77,17 +77,21 @@ function calculateTeamStats(allmatches:matches[], team: Iteams):LeaderBoard {
     totalLosses: totalGames - (valorVitory + totalDraws),
     goalsFavor: goalsFavor(teamMatches, team),
     goalsOwn: goalsOwn(teamMatches, team),
-    goalsBalance: calculateGoalsBalance(goalsFavor(allmatches, team), goalsOwn(allmatches, team)),
+    goalsBalance: calcGoalsBal(goalsFavor(allmatches, team), goalsOwn(allmatches, team)),
     efficiency: calculateEfficiency(totalPoints, totalGames),
 
   };
 }
 
 export default calculateTeamStats;
+
 export {
   ordenarTabela,
   calculateTotalPoints,
-  calculateGoalsBalance,
+  calcGoalsBal,
   calculateEfficiency,
+  filterFinishedMatches,
+  calculateTotalDraws,
+  calculateTotalVictories,
 };
 // ...

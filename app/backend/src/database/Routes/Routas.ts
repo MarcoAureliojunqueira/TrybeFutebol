@@ -5,7 +5,7 @@ import TeamController from '../Controllers/ControllerTeams';
 import { login, loginGet } from '../Controllers/ControllerLogin';
 import { getAllMatches, finalizarPartidas,
   getIdMatches, inserirJogos } from '../Controllers/ControlerMatches';
-import { timesdeCasa, timesdeFora } from '../Controllers/Controlerleaderboard';
+import { timesdeCasa, timesdeFora, Leaderboard } from '../Controllers/Controlerleaderboard';
 import token from '../../Middlewares/token';
 
 const team = new TeamController();
@@ -60,6 +60,13 @@ router.get(
     req: Request,
     res: Response,
   ) => timesdeFora(req, res),
+);
+router.get(
+  '/leaderboard',
+  (
+    req: Request,
+    res: Response,
+  ) => Leaderboard(req, res),
 );
 
 export default router;
