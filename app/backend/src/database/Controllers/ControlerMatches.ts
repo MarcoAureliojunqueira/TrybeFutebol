@@ -12,6 +12,8 @@ async function getAllMatches(req:Request, res:Response):Promise<Response | void>
     const finishedMatches = get.filter((match) => !match.inProgress);
     res.json(finishedMatches);
   } else {
+    console.log(get);
+
     return res.status(200).json(get);
   }
 }

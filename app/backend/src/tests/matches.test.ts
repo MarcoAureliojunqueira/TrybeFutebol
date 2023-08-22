@@ -4,7 +4,7 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 
 import { app } from '../app';
-import { chamadaMatches } from '../tests/mock.test';
+import { valorMacthes } from '../tests/mock.test';
 
 import { Response } from 'superagent';
 import ModelMatches from '../database/models/matches';
@@ -16,21 +16,44 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('Seu teste Matches', () => {
-  it('get Matches', async function() {
-    sinon.stub(ModelMatches ,'findAll').resolves(chamadaMatches as any);
+  it('return all Login', async function() {
+   
+       const t= await chai.request(app).get('/matches');
+       
+       expect(t.status).to.equal(200);
+     //  expect(t.body).to.deep.equal(valorLeaderBord);
+     })
+     it('return all matchesId', async function() {
+   
+      const t= await chai.request(app).patch('/matches/:id');
+      
+      expect(t.status).to.equal(200);
+    //  expect(t.body).to.deep.equal(valorLeaderBord);
+    })
+    it('return all matchesId se der Errado', async function() {
+   
+      const t= await chai.request(app).patch('/matches/:id');
+      
+      expect(t.status).to.equal(401);
+    //  expect(t.body).to.deep.equal(valorLeaderBord);
+    })
 
-    const { status, body } = await chai.request(app).get('/matches');
-    expect(status).to.equal(200);
-    expect(body).to.deep.equal(chamadaMatches);
-  });
-  it(' getById Matches', async function() {
-    sinon.stub(ModelMatches ,'findByPk').resolves(Teams as any);
 
-    const { status, body } = await chai.request(app).get('/teams/1');
-    expect(status).to.equal(200);
-    expect(body).to.deep.equal(Teams);
-  });
+    it('return all matchesId/finish', async function() {
+   
+      const t= await chai.request(app).patch('/matches/:id/finish');
+      
+      expect(t.status).to.equal(200);
+    //  expect(t.body).to.deep.equal(valorLeaderBord);
+    })
+    it('return all matchesId/finish se der Errado', async function() {
+   
+      const t= await chai.request(app).patch('/matches/:id');
+      
+      expect(t.status).to.equal(401);
+    //  expect(t.body).to.deep.equal(valorLeaderBord);
+    })
 
 
-
-});
+afterEach(sinon.restore);
+ });

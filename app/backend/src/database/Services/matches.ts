@@ -13,6 +13,7 @@ async function getMatches():Promise<matches[]> {
       as: 'awayTeam',
       attributes: ['teamName'] },
     ] });
+  console.log(get);
 
   return get as unknown as matches[];
 }
